@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Pagina Inicio";
+}
+@model InventarioSuperModelos.ViewModels.HomeVM;
+
+<div class="row mt-1">
+    <div class="col-sm-12">
+        <h1 class="text-center text-white bg-secondary py-1"><strong>Productos disponibles</strong></h1>
+    </div>
+</div>
+
+@if(Model.Productos.Count() > 0)
+{
+    <br />
+    <div class="row">
+        @foreach (var producto in Model.Productos.OrderBy(o => o.Id))
+        {
+            <div class="col-3">
+                <div class="card">
+                    <img src="@producto.url" style="width:100%; height:10rem" class="img-thumbnail"  />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@producto.Nombre</h5>
+                        <a class="btn btn-success" style="border-radius:10px" asp-action="detalles" asp-route-id="@producto.Id">
+                            Mas información
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-center text-danger">No hay productos disponibles en este momento.</p>
+}
+
+<br />
+<!--Crear botones de páginación-->
+<div class="text-center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item @(Model.Pagesize > 1? "": "disabled")">
+                <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-page="@(Model.Pagesize - 1)">Anterior</a>
+            </li>
+            @for(int x = 1; x <= Model.Totalpage; x++ )
+            {
+                <li class="page-item @(Model.Pagesize == x? "active" : "") " >
+                    <a class="page-link " asp-controller="Home" asp-action="Index" asp-route-page="@x">
+                        @x
+                    </a>
+                </li>
+            }
+            <li class="page-item @(Model.Pagesize < Model.Totalpage ? "":"disabled")">
+                <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-page="@(Model.Pagesize + 1)">Siguiente</a>
+            </li> 
+         </ul>
+    </nav>
+</div>

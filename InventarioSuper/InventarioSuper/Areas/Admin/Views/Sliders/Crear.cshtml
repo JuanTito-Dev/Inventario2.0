@@ -1,0 +1,60 @@
+﻿@model InventarioSuperModelos.Slider;
+@{
+    ViewData["Title"] = "Crear slider";
+}
+
+<br />
+<br />
+<h3 class="text-center">Crear una nuevo slider</h3>
+
+<form asp-action="Crear" method="POST" enctype="multipart/form-data">
+    <div class="row px-2 offset-1 border">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-10 offset-1 mt-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label asp-for="Nombre"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="Nombre" type="text" class="form-control" placeholder="Ingresa el nombre" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label asp-for="Estado"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="Estado" type="checkbox"/>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label asp-for="Imagen"></label>
+                </div>
+                <div class="col-auto">
+                    <input type="file" name="foto" class="form-control" accept="image/*" />
+                    <span asp-validation-for="Imagen" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="g-3 align-items-center">
+                <div class="col-8">
+                    <partial name="_VistaCrear"></partial>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

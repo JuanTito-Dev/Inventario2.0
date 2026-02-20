@@ -1,0 +1,119 @@
+﻿@model InventarioSuperModelos.ViewModels.ProductoVM;
+@{
+    ViewData["Title"] = "Crear Producto";
+}
+
+<br />
+<br />
+<h3 class="text-center">Editar producto <strong>@Model._Producto.Nombre</strong></h3>
+<br />
+
+
+<form asp-action="Editar" method="POST" style="margin-bottom: 3rem" enctype="multipart/form-data">
+    <div class="row px-2 offset-1 border bg-light">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row g-3 mt-4 ps-4">
+
+            <input type="hidden" asp-for="_Producto.Id" />
+
+            <div class="col-md-6">
+                <div class="col-auto">
+                    <label asp-for="_Producto.Nombre"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="_Producto.Nombre" type="text" class="form-control" placeholder="Ingresa el nombre del producto" />
+                    <span asp-validation-for="_Producto.Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-md-6">
+                <div class="col-auto">
+                    <label asp-for="_Producto.CategoriaId"></label>
+                </div>
+                <div class="col-auto">
+                    @Html.DropDownListFor(m => m._Producto.CategoriaId, Model.ListaCategoria, "Seleccione la categoría ", new { @class = "form-control" })
+                    <span asp-validation-for="_Producto.CategoriaId" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-md-4 g-3">
+                <div class="col-auto">
+                    <label asp-for="_Producto.PrecioCompra"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="_Producto.PrecioCompra" type="number" class="form-control " step="0.01" placeholder="Ingresa el precio de compra 0.00" />
+                    <span asp-validation-for="_Producto.PrecioCompra" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-md-4 g-3">
+                <div class="col-auto">
+                    <label asp-for="_Producto.Precio"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="_Producto.Precio" type="number" class="form-control " step="0.01" placeholder="Ingresa el precio de venta 0.00" />
+                    <span asp-validation-for="_Producto.Precio" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-md-4 g-3">
+                <div class="col-auto">
+                    <label asp-for="_Producto.Cantidad"></label>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="_Producto.Cantidad" type="number" class="form-control " placeholder="Ingresa la cantidad comprada" />
+                    <span asp-validation-for="_Producto.Cantidad" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-md-7 g-3">
+                <div class="col-auto">
+                    <label asp-for="_Producto.Descripcion"></label>
+                </div>
+                <div class="col-auto">
+                    <textarea asp-for="_Producto.Descripcion" class="form-control" placeholder="Ingresa una descripción " id="floatingTextarea"></textarea>
+
+                    <span asp-validation-for="_Producto.Descripcion" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-md-5 g-3">
+                <div class="col-auto">
+                    <label asp-for="_Producto.url"></label>
+                </div>
+                <div class="col-auto">
+                    <input type="file" name="foto" class="form-control" accept="image/*" />
+                    <span asp-validation-for="_Producto.url" class="text-danger"></span>
+                </div>
+                <br />
+                <div>
+                    <img src="@Model._Producto.url" style="width:18rem; height: 15rem"/>
+                </div>
+            </div>
+            <br />
+            <div class="col-md-12 d-flex justify-content-evenly mt-4 mb-5">
+                <div class="col-3">
+                    <button type="submit" class="btn btn-dark form-control"><i class="fa-solid fa-pencil"></i> EDITAR CATEGORÍA</button>
+                </div>
+                &nbsp;
+                <div class="col-3">
+                    <a asp-action="Index" class="btn btn-success form-control"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></svg> VOLVER ATRAS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.9.1/tinymce.min.js" integrity="sha512-09JpfVm/UE1F4k8kcVUooRJAxVMSfw/NIslGlWE/FGXb2uRO1Nt4BXAJ3LxPqNbO3Hccdu46qaBPp9wVpWAVhA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/EditorTinyMce.js"></script>
+}
